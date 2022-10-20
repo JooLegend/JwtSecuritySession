@@ -4,6 +4,7 @@ import com.sparta.jwtsession.account.entity.Account;
 import com.sparta.jwtsession.heart.dto.HeartReponseDto;
 import com.sparta.jwtsession.post.entity.Post;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @Setter
-@RequiredArgsConstructor
+@NoArgsConstructor
 public class Heart {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,5 +31,10 @@ public class Heart {
     public Heart(HeartReponseDto heartReponseDto){
         this.account = heartReponseDto.getAccount();
         this.post = heartReponseDto.getPost();
+    }
+
+    public Heart(Account account, Post post){
+        this.account =account;
+        this.post = post;
     }
 }

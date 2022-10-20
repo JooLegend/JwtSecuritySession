@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-public class HearController {
+public class HeartController {
     private final HeartService heartService;
 
     @PostMapping("/heart/{postId}")

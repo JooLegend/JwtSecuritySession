@@ -6,9 +6,9 @@ import com.sparta.jwtsession.account.entity.Account;
 import com.sparta.jwtsession.comment.entity.Comment;
 import com.sparta.jwtsession.reply.dto.ReplyDto;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import javax.persistence.*;
+
 
 
 @Entity
@@ -17,7 +17,7 @@ public class Reply {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long replyId;
 
     @Column(nullable = false)
     private String replyComent;
@@ -33,9 +33,11 @@ public class Reply {
     private Account account;
 
 
-    public Reply(ReplyDto replyDto) {
+    //replyDto에서는 대댓글의 내용, account에서는 이메일
+    public Reply(ReplyDto replyDto, Account account, Comment comment) {
         this.replyComent = replyDto.getReplyComment();
-        this.comment = comment; //asd
-        this.Account = account; //asd
+        this.account = account;
+        this.comment = comment;
+
     }
 }

@@ -61,9 +61,6 @@ public class Post extends Timestamped {
         this.email = account.getEmail();
     }
 
-    public Post(Account account){
-        this.account =
-    }
 
 
     public void update(PostRequestDto postRequestDto){
