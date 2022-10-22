@@ -36,6 +36,8 @@ public class Comment extends Timestamped {
     private List<Reply> replyList = new ArrayList<>();
 
 
+
+
     public Comment(CommentRequestDto requestDto) {
         this.comments = requestDto.getComments();
     }

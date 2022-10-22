@@ -1,6 +1,7 @@
 package com.sparta.jwtsession.post.controller;
 
 import com.sparta.jwtsession.post.dto.PostRequestDto;
+import com.sparta.jwtsession.post.dto.PostResponseDto;
 import com.sparta.jwtsession.post.entity.Post;
 import com.sparta.jwtsession.post.repository.PostRepository;
 import com.sparta.jwtsession.post.service.PostService;
@@ -39,18 +40,23 @@ public class PostController {
     //그것을 userdetails에서 해줌.
 
     @PostMapping("/posts")
-    public Post creatPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
-        return postService.createPost(postRequestDto, userDetails.getAccount());
+    public PostResponseDto createPost(@RequestBody PostRequestDto postRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return new PostResponseDto(postService.createPost(postRequestDto, userDetails.getAccount()));
     }
 
     @GetMapping("/getPost/{id}")
-    public Optional<Post> getPost(@PathVariable Long id) {
-        return postRepository.findById(id);
+    public PostResponseDto getPost(@PathVariable Long id, @AuthenticationPrincipal UserDetailsImpl userDetails) throws Exception {
+        return new PostResponseDto(postService.getPost(id,userDetails.getAccount()));
     }
 
     @GetMapping("/getPosts")
-    public List<Post> getPosts() {
-        return postRepository.findAll();
+    public List<PostResponseDto> getPosts() {
+        List<PostResponseDto> postResponseDtos
+        for (int i = 0; i ; i++) {
+
+        }
+
+        return postService.getPosts();
     }
 
     @PutMapping("/updatePost/{id}")

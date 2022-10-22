@@ -45,7 +45,19 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiYXV0aCI6IlJPTEVfVVNFU
 GET http://localhost:8080/dev/auth/post
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyIiwiYXV0aCI6IlJPTEVfVVNFUiIsImV4cCI6MTY2NjAyNjMyMn0.849rvU9eZewnJpvO70z80KOwbMJ9AjxkoF1rvYfTA8w3o1gu9SttG5kF3uaKGxUdgzJcSFTI49lHS_l8MW7VRg
 
+### url
+PUT http://localhost:8080/dev/auth/postUrl
+Content-Type: application/json
 
+{
+  "title": "제목",
+  "content" : "내용",
+  "imgUrl" : "https://blog.kakaocdn.net/dn/cZsyTw/btq0u5VBWge/F7xmauYA6r8nnbXSz2vJhK/img.png"
+}
+
+제목: 음 안녕ㅎ
+내용:
+이미지 주소:
 
 ###댓글쓰기
 POST http://localhost:8080/dev/comment

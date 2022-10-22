@@ -33,4 +33,12 @@ public class ReplyService {
     }
 
 
+    public void delete(Long commentId, Account account) {
+        Comment comment = commentRepository.findById(commentId).orElseThrow(
+                () -> new IllegalArgumentException("댓글이 없습니다")
+        );
+
+
+
+    }
 }

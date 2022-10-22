@@ -2,16 +2,15 @@ package com.sparta.jwtsession.post.service;
 
 import com.sparta.jwtsession.account.entity.Account;
 import com.sparta.jwtsession.account.repository.AccountRepository;
-import com.sparta.jwtsession.comment.dto.CommentRequestDto;
 import com.sparta.jwtsession.post.dto.PostRequestDto;
 import com.sparta.jwtsession.post.entity.Post;
 import com.sparta.jwtsession.post.repository.PostRepository;
-import com.sparta.jwtsession.security.user.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -22,8 +21,19 @@ public class PostService {
 
     public Post createPost(PostRequestDto postRequestDto, Account account) {
         //userdetail정보를 받아와서, 실제 포스트에 저장된 유저아이디 값이랑 비교 하는게 들어잇어요
-        Post post = new Post(postRequestDto, account);
+        Post post = new Post(postRequestDto, account); //넵 보여주세요
         return postRepository.save(post);
+    }
+    public Post getPost(Long id, Account account) throws Exception{
+        Post post = postRepository.findById(id).orElseThrow(
+                ()-> new IllegalArgumentException("Not found Id")
+        );
+        return post;
+    }
+
+    public List<Post> getPosts(){
+        List<Post> postList = postRepository.findAll();
+        return postList;
     }
 
     @Transactional
@@ -34,6 +44,8 @@ public class PostService {
                 () -> new IllegalArgumentException("Not found Id")
         );
         String email = post.getEmail();
+
+        //현재 token의 email과 postRepository에 저장된 email이 같은지 비교
         if (account.getEmail().equals(email)){
             post.update(postRequestDto);
             return post;

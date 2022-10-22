@@ -6,6 +6,7 @@ import com.sparta.jwtsession.reply.entity.Reply;
 import com.sparta.jwtsession.reply.service.ReplyService;
 import com.sparta.jwtsession.security.user.UserDetailsImpl;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,14 @@ public class ReplyController {
                              @RequestBody ReplyDto replyDto,
                              @AuthenticationPrincipal UserDetailsImpl userDetails){
         return replyService.create(commentId ,replyDto, userDetails.getAccount());
+    }
+
+    @DeleteMapping("/{commentId}")
+    public String deleteReply(@PathVariable Long commentId,
+                              @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        replyService.delete(commentId, userDetails.getAccount());
+        return "대댓글 삭제" + commentId + " 번 아이디";
+
     }
 
     // 대댓글 삭제 api
